@@ -23,11 +23,24 @@ public class PhoneAdapter extends ArrayAdapter<Phone>{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Phone phone=getItem(position);//获取当前项的Phone实例
-        View view= LayoutInflater.from(getContext()).inflate(resourceID,parent,false);
-        ImageView phoneImage=(ImageView)view.findViewById(R.id.phone_image);
-        TextView phoneName=(TextView)view.findViewById(R.id.phone_name);
-        phoneImage.setImageResource(phone.getImageID());
-        phoneName.setText(phone.getName());
+        View view;
+        ViewHolder viewHolder;
+        if(convertView==null){
+            view= LayoutInflater.from(getContext()).inflate(resourceID,parent,false);
+            viewHolder=new ViewHolder();
+            viewHolder.phoneImage=(ImageView)view.findViewById(R.id.phone_image);
+            viewHolder.phoneName=(TextView)view.findViewById(R.id.phone_name);
+            view.setTag(viewHolder);
+        }else{
+            view=convertView;
+            viewHolder=(ViewHolder)view.getTag();
+        }
+        viewHolder.phoneImage.setImageResource(phone.getImageID());
+        viewHolder.phoneName.setText(phone.getName());
         return view;
+    }
+    class ViewHolder{
+        ImageView phoneImage;
+        TextView phoneName;
     }
 }
