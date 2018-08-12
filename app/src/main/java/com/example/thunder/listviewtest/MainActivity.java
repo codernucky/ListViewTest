@@ -2,7 +2,10 @@ package com.example.thunder.listviewtest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,13 @@ public class MainActivity extends AppCompatActivity {
         ListView listView=(ListView)findViewById(R.id.list_view);
         PhoneAdapter phoneAdapter=new PhoneAdapter(MainActivity.this, R.layout.phone_item,phoneList);
         listView.setAdapter(phoneAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Phone phone=phoneList.get(position);
+                Toast.makeText(MainActivity.this,phone.getName(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void initPhoneList(){
         Phone xiaomi=new Phone("小米", R.drawable.xiaomi);
