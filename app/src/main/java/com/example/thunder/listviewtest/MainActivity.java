@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         initPhoneList();
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         PhoneAdapter phoneAdapter=new PhoneAdapter(phoneList);
         recyclerView.setAdapter(phoneAdapter);
